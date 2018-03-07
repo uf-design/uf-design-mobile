@@ -1,6 +1,6 @@
 {
   "name": "uf-design-mobile",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "基于react-native的移动端组件库",
   "main": "index.js",
   "directories": {
@@ -9,7 +9,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["UF", "UF", "Design"],
+  "keywords": [
+    "UF",
+    "Design"
+  ],
   "dependencies": {
     "react-native-animatable": "^1.2.4"
   },

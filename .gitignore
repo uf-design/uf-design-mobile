@@ -1,5 +1,6 @@
 .vscode
 logs/*.log
+npm/lib/*
 node_modules/
 rn/UFDesign/node_modules/
 rn/UFDesign/dist/components/* 
