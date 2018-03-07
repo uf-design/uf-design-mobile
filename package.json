@@ -1,0 +1,26 @@
+{
+  "name": "uf-design-rn",
+  "version": "1.0.0",
+  "description": "mobile components for react-native",
+  "main": "app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "init": "node ./shell/init",
+    "start": "pm2 start ecosystem.config.js",
+    "native": "node ./shell/run",
+    "pub": "node ./shell/deploy && node ./shell/pub"
+  },
+  "keywords": [
+    "UF",
+    "UF Design"
+  ],
+  "author": "YY",
+  "license": "MIT",
+  "devDependencies": {
+    "shelljs": "^0.8.0"
+  },
+  "dependencies": {}
+}
