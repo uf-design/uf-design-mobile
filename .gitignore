@@ -3,6 +3,7 @@ logs/*.log
 npm/lib/*
 node_modules/
 rn/UFDesign/node_modules/
+rn/UFDesign/app/container/*
 rn/UFDesign/dist/components/* 
 !.gitstate 
 package-lock.json
