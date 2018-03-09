@@ -6,7 +6,8 @@ import {
   Button,
   Checkbox,
   InputNumber,
-  Modal
+  Modal,
+  Tips,
 } from "../../dist/components/indexDemo";
 
 // create a component
@@ -17,7 +18,7 @@ class RootContaner extends Component {
         {/* <Button />
         <InputNumber />
         <Checkbox /> */}
-        <Modal />
+        <Tips />
       </View>
     );
   }

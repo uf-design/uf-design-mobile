@@ -14,21 +14,19 @@ import {
   ActivityIndicator,
   StyleSheet
 } from "react-native";
-
-const contentType = [PropTypes.string, PropTypes.element];
-
-export default class Tpl extends React.Component {
+import Modal from '../modal/index'
+export default class Tips extends React.Component {
   static propTypes = {
     visible: PropTypes.bool,
-    content: PropTypes.oneOf(contentType),
+    content: PropTypes.string,
     contentStyle: PropTypes.array,
     duration: PropTypes.number,
     mask: PropTypes.bool,
     onClose: PropTypes.func
   };
   static defaultProps = {
-    visible: false,
-    content: contentType[0],
+    visible: true,
+    content: 'ok',
     contentStyle: null,
     duration: 2000,
     mask: false,
@@ -39,26 +37,63 @@ export default class Tpl extends React.Component {
     super(props);
 
     this.state = {
-
+      visible: this.props.visible
     };
   }
 
-  handlerFunction(type) {
-    for (let index = 0; index < array.length; index++) {
-      const element = array[index];
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.visible) {
+      this.handlerClose()
     }
   }
 
+  componentDidMount() {
+    this.state.visible && this.handlerClose()
+  }
+
+
+
+  handlerClose() {
+    this.sl = setTimeout(() => this.setState({
+      visible: false
+    }), this.props.duration)
+  }
+
+  componentWillUnmount() {
+    this.sl && clearTimeout(this.sl)
+  }
+
   render() {
-    return <Text>Component 模版文件</Text>;
+    let type = !this.props.children
+    return (
+      <Modal style={styles.modalBox} show={this.state.visible} animationIn="slideInRight" animationOut={"slideOutRight"} backdropColor={this.props.mask ? "black" : "white"}>
+        {
+          type ?
+            <View>
+              <View style={[styles.tipsBox, this.props.contentStyle]} />
+              <Text style={[styles.textStyle]}>{this.props.content}</Text>
+            </View>
+            : this.props.children
+        }
+      </Modal>
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  btnBox: {
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "row"
+  modalBox: { flexDirection: "row", alignItems: 'flex-start', justifyContent: 'flex-end' },
+  tipsBox: {
+    borderRadius: 4,
+    opacity: .6,
+    backgroundColor: Theme.baseMap.brandColor,
+    width: 200,
+    height: 50
   },
-  btnTxt: {}
+  textStyle: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    fontSize: Theme.baseMap.font.font_size_base, color:
+      "#fff"
+  }
 });
