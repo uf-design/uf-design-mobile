@@ -14,7 +14,7 @@ import {
   ActivityIndicator,
   StyleSheet
 } from "react-native";
-import Modal from '../modal/index'
+import Modal from "../modal/index";
 export default class Tips extends React.Component {
   static propTypes = {
     visible: PropTypes.bool,
@@ -25,10 +25,10 @@ export default class Tips extends React.Component {
     onClose: PropTypes.func
   };
   static defaultProps = {
-    visible: true,
-    content: 'ok',
+    visible: false,
+    content: "ok",
     contentStyle: null,
-    duration: 2000,
+    duration: 3000,
     mask: false,
     onClose: () => null
   };
@@ -43,57 +43,75 @@ export default class Tips extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.visible) {
-      this.handlerClose()
+      this.handlerClose(nextProps.visible);
     }
   }
 
   componentDidMount() {
-    this.state.visible && this.handlerClose()
+    this.state.visible && this.handlerClose();
   }
 
-
-
-  handlerClose() {
-    this.sl = setTimeout(() => this.setState({
-      visible: false
-    }), this.props.duration)
+  handlerClose(op) {
+    this.setState(
+      {
+        visible: op
+      },
+      () =>
+        (this.sl = setTimeout(
+          () =>
+            this.setState({
+              visible: false
+            }),
+          this.props.duration
+        ))
+    );
   }
 
   componentWillUnmount() {
-    this.sl && clearTimeout(this.sl)
+    this.sl && clearTimeout(this.sl);
   }
 
   render() {
-    let type = !this.props.children
+    let type = !this.props.children;
     return (
-      <Modal style={styles.modalBox} show={this.state.visible} animationIn="slideInRight" animationOut={"slideOutRight"} backdropColor={this.props.mask ? "black" : "white"}>
-        {
-          type ?
-            <View>
-              <View style={[styles.tipsBox, this.props.contentStyle]} />
-              <Text style={[styles.textStyle]}>{this.props.content}</Text>
-            </View>
-            : this.props.children
-        }
+      <Modal
+        style={styles.modalBox}
+        show={this.state.visible}
+        animationIn="slideInRight"
+        animationOut={"slideOutRight"}
+        backdropColor={this.props.mask ? "black" : "white"}
+      >
+        {type ? (
+          <View>
+            <View style={[styles.tipsBox, this.props.contentStyle]} />
+            <Text style={[styles.textStyle]}>{this.props.content}</Text>
+          </View>
+        ) : (
+          this.props.children
+        )}
       </Modal>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
-  modalBox: { flexDirection: "row", alignItems: 'flex-start', justifyContent: 'flex-end' },
+  modalBox: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    justifyContent: "flex-end"
+  },
   tipsBox: {
     borderRadius: 4,
-    opacity: .6,
+    opacity: 0.6,
     backgroundColor: Theme.baseMap.brandColor,
     width: 200,
     height: 50
   },
   textStyle: {
-    position: 'absolute',
+    position: "absolute",
     top: 10,
     left: 10,
-    fontSize: Theme.baseMap.font.font_size_base, color:
-      "#fff"
+    fontSize: Theme.baseMap.font.font_size_base,
+    color: "#fff"
   }
 });

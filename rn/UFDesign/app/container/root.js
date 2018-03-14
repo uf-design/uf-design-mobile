@@ -8,6 +8,8 @@ import {
   InputNumber,
   Modal,
   Tips,
+  Loading,
+  Select
 } from "../../dist/components/indexDemo";
 
 // create a component
@@ -15,9 +17,11 @@ class RootContaner extends Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Button />
-        <InputNumber />
-        <Checkbox /> */}
+        <Button />
+        {/*   <InputNumber />
+        <Checkbox /> 
+        <Loading />*/}
+        <Select />
         <Tips />
       </View>
     );
