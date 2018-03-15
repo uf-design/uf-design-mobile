@@ -13,7 +13,7 @@ import Select from "../index";
 class SelectDemo extends Component {
   makeData() {
     let arr = [];
-    for (let index = 0; index < 6; index++) {
+    for (let index = 0; index < 26; index++) {
       arr.push({
         id: index,
         name: Math.random()
@@ -25,7 +25,8 @@ class SelectDemo extends Component {
   }
   state = {
     visible: true,
-    options: this.makeData()
+    options: this.makeData(),
+    selected: {}
   };
   render() {
     return (
@@ -35,9 +36,9 @@ class SelectDemo extends Component {
         </TouchableOpacity>
         <Select
           visible={this.state.visible}
-          selected={{ id: 2 }}
+          selected={this.state.selected}
           options={this.state.options}
-          onChange={sel => console.log(sel.name)}
+          onChange={sel => (this.state.selected = sel)}
         />
       </View>
     );

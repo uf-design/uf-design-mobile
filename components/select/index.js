@@ -56,7 +56,7 @@ export default class Select extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.visible && !this.state.visible) {
-      this._show();
+      this._show(nextProps);
     }
   }
 
@@ -73,11 +73,11 @@ export default class Select extends React.Component {
     );
   }
 
-  _show() {
+  _show(nprops) {
     this.setState({
-      visible: true,
-      selected: this.props.selected,
-      options: this.state.options
+      visible: nprops.visible,
+      selected: nprops.selected,
+      options: nprops.options
     });
   }
   //end
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   modalBox: {},
   container: {
     flex: 1,
-    // borderRadius: Theme.baseMap.radius.radius_sm,
+    borderRadius: Theme.baseMap.radius.radius_md,
     backgroundColor: "#fff"
   },
   icon: {
@@ -187,7 +187,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderWidth: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "transparent",
+    borderTopLeftRadius: Theme.baseMap.radius.radius_md,
+    borderTopRightRadius: Theme.baseMap.radius.radius_md,
     borderColor: Theme.baseMap.color.border
   },
   closeBox: {

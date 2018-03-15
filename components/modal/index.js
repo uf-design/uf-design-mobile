@@ -16,7 +16,7 @@ import {
   View,
   initializeRegistryWithDefinitions
 } from "react-native-animatable";
-import * as ANIMATION_CONFIGS from "./animations";
+import * as ANIMATION_CONFIGS from "./lib/animations";
 
 // 自定义动画
 initializeRegistryWithDefinitions(ANIMATION_CONFIGS);
