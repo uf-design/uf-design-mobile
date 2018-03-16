@@ -1,17 +1,18 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
 import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+  View
+} from "react-native";
 
-import styles from './styles';
+import styles from "./styles";
 
 export default class Day extends Component {
   static defaultProps = {
-    customStyle: {},
-  }
+    customStyle: {}
+  };
 
   static propTypes = {
     caption: PropTypes.any,
@@ -22,30 +23,47 @@ export default class Day extends Component {
     isToday: PropTypes.bool,
     isWeekend: PropTypes.bool,
     onPress: PropTypes.func,
-    showEventIndicators: PropTypes.bool,
-  }
+    showEventIndicators: PropTypes.bool
+  };
 
   dayCircleStyle = (isWeekend, isSelected, isToday, event) => {
     const { customStyle } = this.props;
-    const dayCircleStyle = [styles.dayCircleFiller, customStyle.dayCircleFiller];
+    const dayCircleStyle = [
+      styles.dayCircleFiller,
+      customStyle.dayCircleFiller
+    ];
 
     if (isSelected) {
       if (isToday) {
-        dayCircleStyle.push(styles.currentDayCircle, customStyle.currentDayCircle);
+        dayCircleStyle.push(
+          styles.currentDayCircle,
+          customStyle.currentDayCircle
+        );
       } else {
-        dayCircleStyle.push(styles.selectedDayCircle, customStyle.selectedDayCircle);
+        dayCircleStyle.push(
+          styles.selectedDayCircle,
+          customStyle.selectedDayCircle
+        );
       }
     }
 
     if (event) {
       if (isSelected) {
-        dayCircleStyle.push(styles.hasEventDaySelectedCircle, customStyle.hasEventDaySelectedCircle, event.hasEventDaySelectedCircle);
+        dayCircleStyle.push(
+          styles.hasEventDaySelectedCircle,
+          customStyle.hasEventDaySelectedCircle,
+          event.hasEventDaySelectedCircle
+        );
       } else {
-        dayCircleStyle.push(styles.hasEventCircle, customStyle.hasEventCircle, event.hasEventCircle);
+        dayCircleStyle.push(
+          styles.hasEventCircle,
+          customStyle.hasEventCircle,
+          event.hasEventCircle
+        );
       }
     }
     return dayCircleStyle;
-  }
+  };
 
   dayTextStyle = (isWeekend, isSelected, isToday, event) => {
     const { customStyle } = this.props;
@@ -60,20 +78,27 @@ export default class Day extends Component {
     }
 
     if (event) {
-      dayTextStyle.push(styles.hasEventText, customStyle.hasEventText, event.hasEventText)
+      dayTextStyle.push(
+        styles.hasEventText,
+        customStyle.hasEventText,
+        event.hasEventText
+      );
     }
     return dayTextStyle;
-  }
+  };
 
   dayButtonStyle = (isWeekend, isSelected, isToday, event) => {
     const { customStyle } = this.props;
     const dayButtonStyle = [styles.dayButton, customStyle.dayButton];
 
     if (isWeekend) {
-      dayButtonStyle.push(styles.weekendDayButton, customStyle.weekendDayButton);
+      dayButtonStyle.push(
+        styles.weekendDayButton,
+        customStyle.weekendDayButton
+      );
     }
     return dayButtonStyle;
-  }
+  };
 
   render() {
     let { caption, customStyle } = this.props;
@@ -83,32 +108,40 @@ export default class Day extends Component {
       isWeekend,
       isSelected,
       isToday,
-      showEventIndicators,
+      showEventIndicators
     } = this.props;
 
-    return filler
-    ? (
-        <TouchableWithoutFeedback>
-          <View style={[styles.dayButtonFiller, customStyle.dayButtonFiller]}>
-            <Text style={[styles.day, customStyle.day]} />
-          </View>
-        </TouchableWithoutFeedback>
-      )
-    : (
+    return filler ? (
+      <TouchableWithoutFeedback>
+        <View style={[styles.dayButtonFiller, customStyle.dayButtonFiller]}>
+          <Text style={[styles.day, customStyle.day]} />
+        </View>
+      </TouchableWithoutFeedback>
+    ) : (
       <TouchableOpacity onPress={this.props.onPress}>
-        <View style={this.dayButtonStyle(isWeekend, isSelected, isToday, event)}>
-          <View style={this.dayCircleStyle(isWeekend, isSelected, isToday, event)}>
-            <Text style={this.dayTextStyle(isWeekend, isSelected, isToday, event)}>{caption}</Text>
+        <View
+          style={this.dayButtonStyle(isWeekend, isSelected, isToday, event)}
+        >
+          <View
+            style={this.dayCircleStyle(isWeekend, isSelected, isToday, event)}
+          >
+            <Text
+              style={this.dayTextStyle(isWeekend, isSelected, isToday, event)}
+            >
+              {caption}
+            </Text>
           </View>
-          {showEventIndicators &&
-            <View style={[
-              styles.eventIndicatorFiller,
-              customStyle.eventIndicatorFiller,
-              event && styles.eventIndicator,
-              event && customStyle.eventIndicator,
-              event && event.eventIndicator]}
+          {showEventIndicators && (
+            <View
+              style={[
+                styles.eventIndicatorFiller,
+                customStyle.eventIndicatorFiller,
+                event && styles.eventIndicator,
+                event && customStyle.eventIndicator,
+                event && event.eventIndicator
+              ]}
             />
-          }
+          )}
         </View>
       </TouchableOpacity>
     );

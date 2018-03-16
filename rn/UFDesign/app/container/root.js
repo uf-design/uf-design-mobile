@@ -9,10 +9,18 @@ import {
   Modal,
   Tips,
   Loading,
-  Select
+  Select,
+  Calendar
 } from "../../dist/components/indexDemo";
-
 // create a component
+const customStyle = {
+  calendarContainer: {
+    backgroundColor: "#fff"
+  },
+  selectedDayCircle: {
+    backgroundColor: "blue"
+  }
+};
 class RootContaner extends Component {
   render() {
     return (
@@ -21,7 +29,9 @@ class RootContaner extends Component {
         {/*   <InputNumber />
         <Checkbox /> 
         <Loading />*/}
-        <Select />
+        <Calendar />
+        {/* <Select /> */}
+
         <Tips />
       </View>
     );

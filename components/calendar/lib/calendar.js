@@ -146,12 +146,12 @@ export default class Calendar extends Component {
   }
 
   selectDate(date) {
-    if (this.props.selectedDate === undefined) {
-      this.setState({
-        selectedMoment: date,
-        currentMoment: date
-      });
-    }
+    // if (!this.props.selectedDate) {
+    this.setState({
+      selectedMoment: date,
+      currentMoment: date
+    });
+    // }
   }
 
   selectAndJumpToToday() {

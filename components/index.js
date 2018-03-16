@@ -5,3 +5,4 @@ export { default as Modal } from "./modal/index";
 export { default as Tips } from "./tips/index";
 export { default as Loading } from "./loading/index";
 export { default as Select } from "./select/index";
+export { default as Calendar } from "./calendar/index";

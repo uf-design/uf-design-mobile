@@ -1,109 +1,105 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from "react-native";
 
-const DEVICE_WIDTH = Dimensions.get('window').width;
+const DEVICE_WIDTH = Dimensions.get("window").width;
 
 const styles = StyleSheet.create({
   calendarContainer: {
-    backgroundColor: '#f7f7f7',
+    backgroundColor: "#f7f7f7"
   },
   monthContainer: {
-    width: DEVICE_WIDTH,
+    width: DEVICE_WIDTH
   },
   calendarControls: {
-    flexDirection: 'row',
+    flexDirection: "row"
   },
-  controlButton: {
-  },
+  controlButton: {},
   controlButtonText: {
     margin: 10,
-    fontSize: 15,
+    fontSize: 15
   },
   title: {
     flex: 1,
-    margin: 10,
+    margin: 10
   },
   titleText: {
-    textAlign: 'center',
-    fontSize: 15,
+    textAlign: "center",
+    fontSize: 15
   },
   calendarHeading: {
-    flexDirection: 'row',
+    flexDirection: "row",
     borderTopWidth: 1,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1
   },
   dayHeading: {
     flex: 1,
     fontSize: 15,
-    textAlign: 'center',
-    marginVertical: 5,
+    textAlign: "center",
+    marginVertical: 5
   },
   weekendHeading: {
     flex: 1,
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 5,
-    color: '#cccccc',
+    color: "#cccccc"
   },
   weekRow: {
-    flexDirection: 'row',
+    flexDirection: "row"
   },
   weekendDayButton: {
-    backgroundColor: '#fafafa',
+    backgroundColor: "#fafafa"
   },
   dayButton: {
-    alignItems: 'center',
+    alignItems: "center",
     padding: 5,
     width: DEVICE_WIDTH / 7,
     borderTopWidth: 1,
-    borderTopColor: '#e9e9e9',
+    borderTopColor: "#e9e9e9"
   },
   dayButtonFiller: {
     padding: 5,
-    width: DEVICE_WIDTH / 7,
+    width: DEVICE_WIDTH / 7
   },
   day: {
     fontSize: 16,
-    alignSelf: 'center',
+    alignSelf: "center"
   },
   eventIndicatorFiller: {
     marginTop: 3,
-    borderColor: 'transparent',
+    borderColor: "transparent",
     width: 4,
     height: 4,
-    borderRadius: 2,
+    borderRadius: 2
   },
   eventIndicator: {
-    backgroundColor: '#cccccc',
+    backgroundColor: "#cccccc"
   },
   dayCircleFiller: {
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+    justifyContent: "center",
+    backgroundColor: "transparent",
     width: 28,
     height: 28,
-    borderRadius: 14,
+    borderRadius: 14
   },
   currentDayCircle: {
-    backgroundColor: 'red',
+    backgroundColor: "red"
   },
   currentDayText: {
-    color: 'red',
+    color: "red"
   },
   selectedDayCircle: {
-    backgroundColor: 'black',
+    backgroundColor: "black"
   },
-  hasEventCircle: {
-  },
-  hasEventDaySelectedCircle: {
-  },
-  hasEventText: {
-  },
+  hasEventCircle: {},
+  hasEventDaySelectedCircle: {},
+  hasEventText: {},
   selectedDayText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold"
   },
   weekendDayText: {
-    color: '#cccccc',
-  },
+    color: "#cccccc"
+  }
 });
 
 export default styles;

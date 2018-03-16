@@ -1,6 +1,6 @@
 /**
 |--------------------------------------------------
-| 日期组件
+| Calendar
 |--------------------------------------------------
 */
 //import liraries
@@ -8,39 +8,46 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Theme from "../local-theme/index";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import Modal from "react-native-modal";
-import Calendar from "react-native-calendar";
-import Icon from "../Iconfont/Iconfont";
-import I18n from "react-native-i18n";
-import AppTheme from "../../modules/common/theme/config";
+import Modal from "../modal/index";
+import { default as CalendarBase } from "./lib/calendar";
 
 // create a component
 const customStyle = {
   calendarContainer: {
-    backgroundColor: AppTheme.currentMap.extra.white.color
+    backgroundColor: "#fff"
   },
   selectedDayCircle: {
-    backgroundColor: AppTheme.currentMap.extra.red.color
+    backgroundColor: Theme.baseMap.brandColor
   }
 };
-class CalendarModal extends Component {
+class Calendar extends Component {
   static propTypes = {
-    cb: PropTypes.func,
-    selectedDate: PropTypes.string
+    show: PropTypes.bool,
+    selectedDate: PropTypes.any,
+    onSelect: PropTypes.func
   };
 
-  static defaultProps = {};
+  static defaultProps = {
+    show: false,
+    onSelect: () => null
+  };
   constructor(props) {
     super(props);
     this.state = {
-      isCalendarVisible: false,
+      show: this.props.show,
       selectedDate: null
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.show && !this.state.show) {
+      this._invokeCalendarModal();
+    }
+  }
+
   _invokeCalendarModal() {
     this.setState({
-      isCalendarVisible: !this.state.isCalendarVisible
+      show: !this.state.show
     });
   }
 
@@ -49,59 +56,52 @@ class CalendarModal extends Component {
   }
 
   onConfirmDate() {
-    this.props.cb &&
+    this.props.onSelect &&
       this.state.selectedDate &&
-      this.props.cb(this.state.selectedDate);
+      this.props.onSelect(this.state.selectedDate);
     this._invokeCalendarModal();
   }
 
   render() {
     return (
       <Modal
-        isVisible={this.state.isCalendarVisible}
+        show={this.state.show}
         style={{ margin: 0 }}
         onBackdropPress={() => this._invokeCalendarModal()}
-        animationIn={"slideInLeft"}
-        animationOut={"slideOutRight"}
+        animationIn={"slideInDown"}
+        animationOut={"slideOutDown"}
       >
-        {/* <View style={{ backgroundColor: AppTheme.currentMap.extra.white.color, height: 300 }}> */}
-        <Calendar
+        {/* <View style={{ backgroundColor: '#fff', height: 300 }}> */}
+        <CalendarBase
           showControls={true}
+          startDate={this.props.selectedDate}
           selectedDate={this.props.selectedDate}
           onDateSelect={date => this._onDateSelect(date)}
           customStyle={customStyle}
-          dayHeadings={[
-            I18n.t("周日"),
-            I18n.t("周一"),
-            I18n.t("周二"),
-            I18n.t("周三"),
-            I18n.t("周四"),
-            I18n.t("周五"),
-            I18n.t("周六")
-          ]}
+          dayHeadings={["周日", "周一", "周二", "周三", "周四", "周五", "周六"]}
           monthNames={[
-            I18n.t("一月"),
-            I18n.t("二月"),
-            I18n.t("三月"),
-            I18n.t("四月"),
-            I18n.t("五月"),
-            I18n.t("六月"),
-            I18n.t("七月"),
-            I18n.t("八月"),
-            I18n.t("九月"),
-            I18n.t("十月"),
-            I18n.t("十一月"),
-            I18n.t("十二月")
+            "一月",
+            "二月",
+            "三月",
+            "四月",
+            "五月",
+            "六月",
+            "七月",
+            "八月",
+            "九月",
+            "十月",
+            "十一月",
+            "十二月"
           ]}
-          prevButtonText={<Icon name="icon-dingbu-fanhui" size={14} />}
-          nextButtonText={<Icon name="icon-zhishiqixiangyou" size={14} />}
+          prevButtonText={"<"}
+          nextButtonText={">"}
         />
         {/* handler */}
         <View
           style={{
             width: "100%",
             height: 40,
-            backgroundColor: AppTheme.currentMap.extra.white.color,
+            backgroundColor: "#fff",
             flexDirection: "row"
           }}
         >
@@ -111,29 +111,29 @@ class CalendarModal extends Component {
           >
             <Text
               style={{
-                fontSize: 14,
-                color: AppTheme.currentMap.normal.title3.color
+                fontSize: Theme.baseMap.font.font_size_base,
+                color: Theme.baseMap.color.seconddaryText
               }}
             >
-              {I18n.t("取消")}
+              {"取消"}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => this.onConfirmDate()}
             style={{
               flex: 2,
-              backgroundColor: AppTheme.currentMap.extra.red.color,
+              backgroundColor: Theme.baseMap.brandColor,
               alignItems: "center",
               justifyContent: "center"
             }}
           >
             <Text
               style={{
-                fontSize: 14,
-                color: AppTheme.currentMap.normal.title1.color
+                fontSize: Theme.baseMap.font.font_size_base,
+                color: Theme.baseMap.color.title
               }}
             >
-              {I18n.t("确定")}
+              {"确定"}
             </Text>
           </TouchableOpacity>
           {/* </View> */}
@@ -154,4 +154,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default CalendarModal;
+export default Calendar;
