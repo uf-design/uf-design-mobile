@@ -10,7 +10,8 @@ import {
   Tips,
   Loading,
   Select,
-  Calendar
+  Calendar,
+  ListView
 } from "../../dist/components/indexDemo";
 // create a component
 const customStyle = {
@@ -31,8 +32,8 @@ class RootContaner extends Component {
         <Loading />*/}
         <Calendar />
         {/* <Select /> */}
-
         <Tips />
+        <ListView />
       </View>
     );
   }

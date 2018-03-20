@@ -23,8 +23,7 @@ class Loading extends React.Component {
     label: PropTypes.string,
     color: PropTypes.string,
     size: PropTypes.oneOf(SIZES),
-    overlayColor: PropTypes.string,
-    onRequestClose: PropTypes.func
+    overlayColor: PropTypes.string
   };
 
   static defaultProps = {
@@ -32,8 +31,7 @@ class Loading extends React.Component {
     label: "加载中...",
     color: "white",
     size: "large",
-    overlayColor: "transparent",
-    onRequestClose() {}
+    overlayColor: "transparent"
   };
 
   constructor(props) {
